@@ -37,6 +37,10 @@ class _SplashState extends State<Splash> {
         .checkPermissionStatus(PermissionGroup.storage);
     if (permissionStatus != PermissionStatus.granted)
       permissions.add(PermissionGroup.storage);
+    PermissionStatus locationPermissionStatus = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.location);
+    if (locationPermissionStatus != PermissionStatus.granted)
+      permissions.add(PermissionGroup.location);
     if (permissions.isNotEmpty) await requestPermission();
   }
 

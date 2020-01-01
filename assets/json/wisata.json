@@ -13,8 +13,8 @@
     {
       "nama": "Gili Genting",
       "koordinat": {
-        "latitude": -7.2033374,
-        "longitude": 114.0375932
+        "latitude": -7.1750928,
+        "longitude": 113.9196218
       },
       "deskripsi": "ini adalah pantai gili genting",
       "gambar": "assets/img/gili_genting.jpg",
@@ -22,8 +22,8 @@
     }, {
       "nama": "Masjid Jamik",
       "koordinat": {
-        "latitude": -7.2033374,
-        "longitude": 114.0375932
+        "latitude": -7.0078667,
+        "longitude": 113.8565143
       },
       "deskripsi": "ini adalah masjid jamik sumenep",
       "gambar": "assets/img/masjid.jpg",

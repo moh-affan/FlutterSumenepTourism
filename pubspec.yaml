@@ -33,6 +33,7 @@ dependencies:
 #  progress_dialog: ^1.2.0
   google_maps_flutter: ^0.5.21+15
   location: ^2.3.5
+  flutter_html: ^0.11.1
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ flutter:
     - assets/vr/
     - assets/img/
     - assets/json/
+    - assets/html/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

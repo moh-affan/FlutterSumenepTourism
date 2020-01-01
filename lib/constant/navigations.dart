@@ -6,4 +6,5 @@ class AppRoutes {
   //Page Routes
   static const String SPLASH = "/";
   static const String BERANDA = "/beranda";
+  static const String PETA = "/peta";
 }

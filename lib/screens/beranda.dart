@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:sumenep_tourism/constant/app.dart';
+import 'package:sumenep_tourism/constant/navigations.dart';
 import 'package:sumenep_tourism/models/wisata.dart';
+import 'package:sumenep_tourism/screens/tentang_sumenep.dart';
 import 'package:sumenep_tourism/widgets/carousel.dart';
 
 class BerandaPage extends StatefulWidget {
@@ -17,7 +21,6 @@ class BerandaPageState extends State<BerandaPage>
   double height, width;
   List<Wisata> listWisata;
   TabController _tabController;
-  int _tabIndex = 0;
   final MethodChannel methodChannel =
       MethodChannel("com.affan.sumenep_tourism/method_channel");
 
@@ -36,8 +39,9 @@ class BerandaPageState extends State<BerandaPage>
 
   void onTabChange() {
     print(_tabController.index);
-    this._tabIndex = _tabController.index;
-    setState(() {});
+//    if (_tabController.index == 1) {
+//      Navigator.of(context).pushNamed(AppRoutes.PETA);
+//    }
   }
 
   void _loadData() async {
@@ -48,65 +52,58 @@ class BerandaPageState extends State<BerandaPage>
         .map((json) => Wisata.fromJson(json))
         .toList();
     setState(() {});
-    print(listWisata[0]);
   }
 
-  Widget _buidBody(int tabIndex) {
-    if (tabIndex == 0) {
-      return Stack(
-        children: <Widget>[
-          GridView.count(
-            crossAxisCount: 2,
-            padding: EdgeInsets.all(20),
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            children: listWisata
-                .map((wisata) => Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: ExactAssetImage(wisata.gambar))),
-                      child: InkWell(
-                        onTap: () async {
-                          print(wisata.nama);
-                          var res = await methodChannel.invokeMethod(
-                              "showDetail", {
-                            "vrImage": wisata.vrImage,
-                            "deskripsi": wisata.deskripsi,
-                            "nama": wisata.nama,
-                          });
-                        },
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
-                              wisata.nama,
-                              style: TextStyle(
-                                  fontFamily: "Rubik",
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  shadows: [
-                                    Shadow(
-                                        color: Colors.black54,
-                                        offset: Offset(.9, .9),
-                                        blurRadius: 1.5)
-                                  ]),
-                            ),
+  Widget _buidBody() {
+    return Stack(
+      children: <Widget>[
+        GridView.count(
+          crossAxisCount: 2,
+          padding: EdgeInsets.all(20),
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          children: listWisata
+              .map((wisata) => Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: ExactAssetImage(wisata.gambar))),
+                    child: InkWell(
+                      onTap: () async {
+                        print(wisata.nama);
+                        var res =
+                            await methodChannel.invokeMethod("showDetail", {
+                          "vrImage": wisata.vrImage,
+                          "deskripsi": wisata.deskripsi,
+                          "nama": wisata.nama,
+                        });
+                      },
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            wisata.nama,
+                            style: TextStyle(
+                                fontFamily: "Rubik",
+                                color: Colors.white,
+                                fontSize: 18,
+                                shadows: [
+                                  Shadow(
+                                      color: Colors.black54,
+                                      offset: Offset(.9, .9),
+                                      blurRadius: 1.5)
+                                ]),
                           ),
                         ),
                       ),
-                    ))
-                .toList(),
-          )
-        ],
-      );
-    } else {
-      return Center(
-        child: Text("Map"),
-      );
-    }
+                    ),
+                  ))
+              .toList(),
+        )
+      ],
+    );
   }
 
   @override
@@ -116,6 +113,15 @@ class BerandaPageState extends State<BerandaPage>
     MyAppContext.context = context;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TentangSumenepPage()));
+        },
+        child: Icon(Icons.info_outline),
+      ),
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
@@ -171,7 +177,13 @@ class BerandaPageState extends State<BerandaPage>
                     tabs: [
                       ListTile(
                           leading: Icon(Icons.apps), title: Text("Wisata")),
-                      ListTile(leading: Icon(Icons.map), title: Text("Peta")),
+                      ListTile(
+                        leading: Icon(Icons.map),
+                        title: Text("Peta"),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(AppRoutes.PETA);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -180,7 +192,7 @@ class BerandaPageState extends State<BerandaPage>
               ),
             ];
           },
-          body: _buidBody(_tabIndex),
+          body: _buidBody(),
         ),
       ),
     );
