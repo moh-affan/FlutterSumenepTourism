@@ -26,6 +26,7 @@ class PetaPageState extends State<PetaPage> {
   MarkerId selectedMarker;
   LocationData currentLocation;
   List<Wisata> listWisata = List<Wisata>();
+  bool filter = false;
 
   void _loadData() async {
     var strWisata = await DefaultAssetBundle.of(context)
@@ -137,16 +138,22 @@ class PetaPageState extends State<PetaPage> {
         onPressed: () {
           markerWisata.clear();
           markers.clear();
-          var nearby = listWisata.where((Wisata wisata) {
-            var distance = currentLocation != null
-                ? getDistanceBetweenCoord(
-                    LatLng(currentLocation.latitude, currentLocation.longitude),
-                    LatLng(
-                        wisata.koordinat.latitude, wisata.koordinat.longitude))
-                : 1000;
-            return distance <= 10;
-          });
-          loadMarkers(nearby.toList());
+          if (!filter) {
+            var nearby = listWisata.where((Wisata wisata) {
+              var distance = currentLocation != null
+                  ? getDistanceBetweenCoord(
+                      LatLng(
+                          currentLocation.latitude, currentLocation.longitude),
+                      LatLng(wisata.koordinat.latitude,
+                          wisata.koordinat.longitude))
+                  : 1000;
+              return distance <= 10;
+            });
+            loadMarkers(nearby.toList());
+          } else {
+            loadMarkers(listWisata);
+          }
+          filter = !filter;
           setState(() {});
         },
         child: Icon(Icons.near_me),
