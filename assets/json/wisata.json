@@ -1,0 +1,33 @@
+{
+  "wisata": [
+    {
+      "nama": "Gili Labak",
+      "koordinat": {
+        "latitude": -7.2033374,
+        "longitude": 114.0375932
+      },
+      "deskripsi": "ini adalah pantai gili labak",
+      "gambar": "assets/img/gili_labak.jpg",
+      "vr_image": "assets/vr/vr.png"
+    },
+    {
+      "nama": "Gili Genting",
+      "koordinat": {
+        "latitude": -7.2033374,
+        "longitude": 114.0375932
+      },
+      "deskripsi": "ini adalah pantai gili genting",
+      "gambar": "assets/img/gili_genting.jpg",
+      "vr_image": "assets/vr/vr3.jpg"
+    }, {
+      "nama": "Masjid Jamik",
+      "koordinat": {
+        "latitude": -7.2033374,
+        "longitude": 114.0375932
+      },
+      "deskripsi": "ini adalah masjid jamik sumenep",
+      "gambar": "assets/img/masjid.jpg",
+      "vr_image": "assets/vr/vr2.jpg"
+    }
+  ]
+}

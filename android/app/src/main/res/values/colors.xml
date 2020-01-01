@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#0E71BE</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--jshine-->
+    <color name="jshine_start">#12c2e9</color>
+    <color name="jshine_middle">#c471ed</color>
+    <color name="jshine_end">#f64f59</color>
+    <!--qeupal-->
+    <color name="quepal_start">#11998e</color>
+    <color name="quepal_end">#38ef7d</color>
+    <!--blueraspbery-->
+    <color name="blueraspbery_start">#00B4DB</color>
+    <color name="blueraspbery_end">#0083B0</color>
+    <!--moonlite-->
+    <color name="moonlite_start">#0F2027</color>
+    <color name="moonlite_middle">#203A43</color>
+    <color name="moonlite_end">#2C5364</color>
+    <!--lunada-->
+    <color name="lunada_start">#5433FF</color>
+    <color name="lunada_middle">#20BDFF</color>
+    <color name="lunada_end">#71bf92</color>
+    <!--mild-->
+    <color name="mild_start">#67B26F</color>
+    <color name="mild_end">#4ca2cd</color>
+    <!--vice-->
+    <color name="vice_start">#3494E6</color>
+    <color name="vice_end">#EC6EAD</color>
+</resources>
