@@ -17,9 +17,14 @@ class TentangSumenepState extends State<TentangSumenepPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     loadData(context);
     print(data);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tentang Sumenep"),
