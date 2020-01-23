@@ -6,8 +6,8 @@ import 'constant/navigations.dart';
 import 'environtment.dart';
 
 void main() async {
-  await Environtment.setup();
   runApp(App());
+  await Environtment.setup();
 }
 
 class App extends StatelessWidget {

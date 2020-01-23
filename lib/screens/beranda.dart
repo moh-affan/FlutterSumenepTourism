@@ -2,12 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:sumenep_tourism/constant/app.dart';
 import 'package:sumenep_tourism/constant/navigations.dart';
 import 'package:sumenep_tourism/models/wisata.dart';
+import 'package:sumenep_tourism/screens/pencarian.dart';
 import 'package:sumenep_tourism/screens/tentang_sumenep.dart';
 import 'package:sumenep_tourism/widgets/carousel.dart';
 
@@ -23,6 +21,7 @@ class BerandaPageState extends State<BerandaPage>
   TabController _tabController;
   final MethodChannel methodChannel =
       MethodChannel("com.affan.sumenep_tourism/method_channel");
+  final ScrollController _scrollController = ScrollController();
 
   void _onSliderChanged(int index) {
     print('index now is $index');
@@ -35,6 +34,9 @@ class BerandaPageState extends State<BerandaPage>
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     _tabController.addListener(onTabChange);
     _loadData();
+    _scrollController.addListener(() {
+      print(_scrollController.offset);
+    });
   }
 
   void onTabChange() {
@@ -108,6 +110,10 @@ class BerandaPageState extends State<BerandaPage>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+    ));
+
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     MyAppContext.context = context;
@@ -125,12 +131,26 @@ class BerandaPageState extends State<BerandaPage>
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
+          controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
                 expandedHeight: 200.0,
                 pinned: true,
                 floating: false,
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      print("on tap");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  PencarianPage()));
+                    },
+                  )
+                ],
 //                backgroundColor: Colors.transparent,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
