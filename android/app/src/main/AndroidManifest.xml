@@ -13,8 +13,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="sumenep_tourism">
+        android:icon="@drawable/visit"
+        android:roundIcon="@drawable/visit"
+        android:label="Sumenep Tourism">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
